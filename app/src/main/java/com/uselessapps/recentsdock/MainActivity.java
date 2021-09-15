@@ -114,7 +114,9 @@ public class MainActivity extends AppCompatActivity {
             super.onActivityResult(requestCode, resultCode, data);
         }
     }
-
+    //
+    // TODO: onAppCustomize
+    //
     @Override
     public void onBackPressed() {
         if(backPressTime + 2000 > System.currentTimeMillis()){
