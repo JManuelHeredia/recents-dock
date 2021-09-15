@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/root_container"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <!--View while view is collapsed-->
+    <RelativeLayout
+        android:id="@+id/collapse_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="visible">
+
+        <!--Icon of floating widget -->
+        <ImageView
+            android:id="@+id/collapsed_dock_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="0dp"
+            android:background="@drawable/rounded_corner_floating_layout" />
+
+        <!--Close button-->
+        <!--            <ImageView-->
+        <!--                android:id="@+id/close_btn"-->
+        <!--                android:layout_width="50dp"-->
+        <!--                android:layout_height="50dp"-->
+        <!--                android:layout_marginLeft="75dp"-->
+        <!--                android:layout_marginTop="25dp"-->
+        <!--                android:src="@drawable/close_overlay_button"-->
+        <!--                tools:ignore="ContentDescription" />-->
+    </RelativeLayout>
+
+    <!--View while view is expanded-->
+    <LinearLayout
+        android:id="@+id/expanded_dock_container"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/rounded_corner_floating_layout"
+        android:orientation="horizontal"
+        android:padding="10dp"
+        android:visibility="gone">
+
+        <!--4 Icons Layout-->
+        <ImageView
+            android:id="@+id/dock_icon_1"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/add_app" />
+
+        <ImageView
+            android:id="@+id/dock_icon_2"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/add_app" />
+
+        <ImageView
+            android:id="@+id/dock_close_buton"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginVertical="20dp"
+            android:src="@drawable/close_overlay_button" />
+
+        <ImageView
+            android:id="@+id/dock_icon_3"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/add_app" />
+
+        <ImageView
+            android:id="@+id/dock_icon_4"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:src="@drawable/add_app" />
+    </LinearLayout>
+</FrameLayout>
