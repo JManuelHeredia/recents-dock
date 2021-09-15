@@ -55,7 +55,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Switch
-        android:id="@+id/switch1"
+        android:id="@+id/service_enabled_switch"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="48dp"
@@ -88,7 +88,7 @@
             android:button="@null"
             android:checked="true"
             android:gravity="center"
-            android:text="Portait"
+            android:text="Portrait"
             android:textColor="@color/white" />
 
         <RadioButton

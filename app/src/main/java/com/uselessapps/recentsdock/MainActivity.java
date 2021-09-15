@@ -3,6 +3,7 @@ package com.uselessapps.recentsdock;
 import android.Manifest;
 import android.app.WallpaperManager;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
@@ -11,24 +12,44 @@ import android.os.Bundle;
 import android.provider.Settings;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Switch;
 import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
+
+import com.google.android.material.switchmaterial.SwitchMaterial;
 import com.hoko.blur.drawable.BlurDrawable;
 
 public class MainActivity extends AppCompatActivity {
-
-//    private ValueAnimator mAnimator;
     private long backPressTime;
     private Toast backToast;
     private static final int CODE_DRAW_OVER_OTHER_APP_PERMISSION = 2084;
+
+    //Preferences Managing
+    public static final String SHARED_PREFERENCES = "sharedPreferences";
+    public static final String SERVICE_SWITCH = "Switch";
+
+    //Load preferences variables
+
+    private Boolean switchServiceOnLoad;
+
+    //App settings preferences
+
+    public Switch switchService;
+    //Dock customization Preferences
+
+
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Initialize Preferences
+        switchService = (Switch) findViewById(R.id.service_enabled_switch);
+        //Listeners
+        switchService.setOnClickListener(view -> savePreferences());
 
         getWindow().getDecorView().setSystemUiVisibility(
                 View.SYSTEM_UI_FLAG_LAYOUT_STABLE | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN | View.SYSTEM_UI_FLAG_LIGHT_NAVIGATION_BAR);
@@ -55,6 +76,7 @@ public class MainActivity extends AppCompatActivity {
         if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE) != PackageManager.PERMISSION_GRANTED) {
             if (ActivityCompat.shouldShowRequestPermissionRationale(MainActivity.this, Manifest.permission.READ_EXTERNAL_STORAGE)) {
                 //Show Information about why you need the permission
+                Toast.makeText(this, "XD", Toast.LENGTH_SHORT).show();
             } else {
                 //just request the permission
                 ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE}, 100);
@@ -65,8 +87,6 @@ public class MainActivity extends AppCompatActivity {
 
             final WallpaperManager userWallpaper = WallpaperManager.getInstance(this);
             final Drawable wallpaperDrawable = userWallpaper.getDrawable();
-
-            wallpaperView.setBackground(wallpaperDrawable);
 
             BlurDrawable blurDrawable = new BlurDrawable();
             blurDrawable.radius(10);
@@ -82,7 +102,11 @@ public class MainActivity extends AppCompatActivity {
 //            gradientDrawable.setCornerRadius(128);
 //            LayerDrawable finalDrawable = new LayerDrawable(new Drawable[]{blurDrawable, gradientDrawable});
 //            view.setBackground(finalDrawable);
+            wallpaperView.setBackground(wallpaperDrawable);
         }
+        //Loading SharedPreferences
+        loadPreferences();
+        updateViews();
     }
     /**
      * Set and initialize the view elements.
@@ -128,5 +152,19 @@ public class MainActivity extends AppCompatActivity {
             backToast.show();
         }
         backPressTime = System.currentTimeMillis();
+    }
+    public void  savePreferences(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+        SharedPreferences.Editor editor = sharedPreferences.edit();
+        editor.putBoolean(SERVICE_SWITCH, switchService.isChecked());
+        editor.apply();
+    }
+
+    public void loadPreferences(){
+        SharedPreferences sharedPreferences = getSharedPreferences(SHARED_PREFERENCES, MODE_PRIVATE);
+        switchServiceOnLoad = sharedPreferences.getBoolean(SERVICE_SWITCH, false);
+    }
+    public void updateViews(){
+        switchService.setChecked(switchServiceOnLoad);
     }
 }
