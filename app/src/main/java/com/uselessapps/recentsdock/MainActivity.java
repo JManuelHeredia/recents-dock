@@ -5,6 +5,10 @@ import android.app.WallpaperManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Build;
@@ -31,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
     public static final String SERVICE_SWITCH = "Switch";
 
     //Load preferences variables
-
+    private Bitmap mWallpaperCropped;
     private Boolean switchServiceOnLoad;
 
     //App settings preferences
@@ -86,23 +90,14 @@ public class MainActivity extends AppCompatActivity {
             ImageView wallpaperView = findViewById(R.id.user_wallpaper);
 
             final WallpaperManager userWallpaper = WallpaperManager.getInstance(this);
-            final Drawable wallpaperDrawable = userWallpaper.getDrawable();
+            final Drawable wallpaperDrawable = userWallpaper.getDrawable().getCurrent();
 
-            BlurDrawable blurDrawable = new BlurDrawable();
-            blurDrawable.radius(10);
-            blurDrawable.sampleFactor(4.0f);
-//            View view = findViewById(R.id.test_view);
-//            view.setBackground(blurDrawable);
-//            view.setRadius(40);
+            mWallpaperCropped = drawableToBitmap(wallpaperDrawable);
+            Drawable d = new BitmapDrawable(mWallpaperCropped);
+//            final Drawable wallpaperDrawable = userWallpaper.getBuiltInDrawable(1080, 520, false, 0.5f, 0.5f, WallpaperManager.FLAG_SYSTEM);
 
-
-
-//            GradientDrawable gradientDrawable = new GradientDrawable();
-//            gradientDrawable.setColor(getResources().getColor(R.color.transparent_black));
-//            gradientDrawable.setCornerRadius(128);
-//            LayerDrawable finalDrawable = new LayerDrawable(new Drawable[]{blurDrawable, gradientDrawable});
-//            view.setBackground(finalDrawable);
-            wallpaperView.setBackground(wallpaperDrawable);
+            wallpaperView.setBackground(d);
+            wallpaperView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
         //Loading SharedPreferences
         loadPreferences();
@@ -166,5 +161,26 @@ public class MainActivity extends AppCompatActivity {
     }
     public void updateViews(){
         switchService.setChecked(switchServiceOnLoad);
+    }
+    public static Bitmap drawableToBitmap (Drawable drawable) {
+        Bitmap bitmap = null;
+
+        if (drawable instanceof BitmapDrawable) {
+            BitmapDrawable bitmapDrawable = (BitmapDrawable) drawable;
+            if(bitmapDrawable.getBitmap() != null) {
+                return bitmapDrawable.getBitmap();
+            }
+        }
+
+        if(drawable.getIntrinsicWidth() <= 0 || drawable.getIntrinsicHeight() <= 0) {
+            bitmap = Bitmap.createBitmap(1, 1, Bitmap.Config.ARGB_8888); // Single color bitmap will be created of 1x1 pixel
+        } else {
+            bitmap = Bitmap.createBitmap(drawable.getIntrinsicWidth(), drawable.getIntrinsicHeight(), Bitmap.Config.ARGB_8888);
+        }
+
+        Canvas canvas = new Canvas(bitmap);
+        drawable.setBounds(0, 0, canvas.getWidth(), 100);
+        drawable.draw(canvas);
+        return bitmap;
     }
 }
