@@ -15,10 +15,10 @@
         <!--Icon of floating widget -->
         <ImageView
             android:id="@+id/collapsed_dock_view"
-            android:layout_width="100dp"
-            android:layout_height="100dp"
+            android:layout_width="24dp"
+            android:layout_height="48dp"
             android:layout_marginTop="0dp"
-            android:background="@drawable/rounded_corner_floating_layout" />
+            android:background="@drawable/rounded_corner_floating_layout_collapsed" />
 
         <!--Close button-->
         <!--            <ImageView-->
