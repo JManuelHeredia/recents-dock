@@ -1,10 +1,12 @@
 package com.uselessapps.recentsdock;
 
 import android.app.Service;
+import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.graphics.PixelFormat;
 import android.os.IBinder;
+import android.text.Layout;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,12 +14,15 @@ import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.hoko.blur.drawable.BlurDrawable;
 
 public class FloatingDockService extends Service {
     private WindowManager mWindowManager;
     private View mDockView;
+    public TextView currentAppTextView;
 
     public FloatingDockService(){
 
@@ -31,8 +36,9 @@ public class FloatingDockService extends Service {
     @Override
     public void onCreate(){
         super.onCreate();
+        Toast.makeText(this, getBaseContext().getPackageName(),Toast.LENGTH_SHORT).show();
 
-        mDockView = LayoutInflater.from(this).inflate(R.layout.floating_dock, null);
+        mDockView = LayoutInflater.from(getApplicationContext()).inflate(R.layout.floating_dock, null);
 
 //        BlurDrawable blurDrawableDock = new BlurDrawable();
 //        blurDrawableDock.mixColor(getResources().getColor(R.color.transparent_black));
@@ -57,7 +63,6 @@ public class FloatingDockService extends Service {
         //========================================================================================
 
         final View collapsedDockView = mDockView.findViewById(R.id.collapse_view);
-
         final View expandedDockView = mDockView.findViewById(R.id.expanded_dock_container);
 
         //Close-Collapse Button
@@ -70,6 +75,7 @@ public class FloatingDockService extends Service {
                 expandedDockView.setVisibility(View.GONE);
                 params.gravity = Gravity.TOP | Gravity.RIGHT;
                 mWindowManager.updateViewLayout(mDockView, params);
+                Toast.makeText(getBaseContext(), getBaseContext().getApplicationContext().getPackageName(),Toast.LENGTH_SHORT);
             }
         });
 
@@ -78,10 +84,12 @@ public class FloatingDockService extends Service {
             @Override
             public void onClick(View view) {
                 collapsedDockView.setVisibility(View.GONE);
+                Toast.makeText(getBaseContext(), getBaseContext().getPackageName(),Toast.LENGTH_SHORT).show();
                 expandedDockView.setVisibility(View.VISIBLE);
                 params.gravity = Gravity.TOP | Gravity.CENTER;
                 mWindowManager.updateViewLayout(mDockView, params);
             }
+
         });
     }
 
@@ -91,7 +99,7 @@ public class FloatingDockService extends Service {
 
     @Override
     public void onDestroy(){
-        super.onDestroy();
         if(mDockView != null) mWindowManager.removeView(mDockView);
+        super.onDestroy();
     }
 }
