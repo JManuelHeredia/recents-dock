@@ -1,0 +1,2 @@
+rootProject.name = "Recents Dock"
+include ':app'

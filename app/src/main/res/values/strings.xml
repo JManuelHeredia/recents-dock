@@ -1,0 +1,16 @@
+<resources>
+    <string name="app_name">Recents Dock</string>
+    <string name="overlay_perm_not_granted">The overlay permission was not granted!</string>
+    <string name="screen_position">Screen position</string>
+    <string name="blur_status">Enable blur</string>
+    <string name="backgroun_color">Background color</string>
+    <string name="corner_radius">Corner radius</string>
+    <string name="spacing">Icon size</string>
+    <string name="vertical_spacing">Vertical</string>
+    <string name="horizontal_spacing">Horizontal</string>
+    <string name="show_shadow">Show shadow</string>
+    <string name="icons_label">Show icons label</string>
+    <string name="icon_size">Icon size</string>
+    <string name="about">about</string>
+    <string name="help">Help</string>
+</resources>
