@@ -12,13 +12,15 @@
         android:id="@+id/user_wallpaper"
         android:layout_width="match_parent"
         android:layout_height="256dp"
-        android:adjustViewBounds="false"
         android:background="#318FFF"
         android:contentDescription="@string/help"
-        android:cropToPadding="false"
         android:focusableInTouchMode="false"
-        android:scaleType="centerCrop"
-        tools:ignore="MissingConstraints" />
+        android:scaleType="fitXY"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints"
+        tools:srcCompat="@tools:sample/backgrounds/scenic" />
 
     <LinearLayout
         android:id="@+id/preview_dock_container"

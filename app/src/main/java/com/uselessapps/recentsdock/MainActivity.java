@@ -96,7 +96,7 @@ public class MainActivity extends AppCompatActivity {
             Drawable d = new BitmapDrawable(mWallpaperCropped);
 //            final Drawable wallpaperDrawable = userWallpaper.getBuiltInDrawable(1080, 520, false, 0.5f, 0.5f, WallpaperManager.FLAG_SYSTEM);
 
-            wallpaperView.setBackground(d);
+            wallpaperView.setImageDrawable(d);
             wallpaperView.setScaleType(ImageView.ScaleType.CENTER_CROP);
         }
         //Loading SharedPreferences
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity {
         }
 
         Canvas canvas = new Canvas(bitmap);
-        drawable.setBounds(0, 0, canvas.getWidth(), 100);
+        drawable.setBounds(0, 0, canvas.getWidth(), 400);
         drawable.draw(canvas);
         return bitmap;
     }
