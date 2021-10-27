@@ -20,6 +20,7 @@ import android.widget.Switch;
 import android.widget.Toast;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.SwitchCompat;
 import androidx.core.app.ActivityCompat;
 
 import com.google.android.material.switchmaterial.SwitchMaterial;
@@ -40,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
 
     //App settings preferences
 
-    public Switch switchService;
+    public SwitchCompat switchService;
     //Dock customization Preferences
 
 
@@ -51,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         //Initialize Preferences
-        switchService = (Switch) findViewById(R.id.service_enabled_switch);
+        switchService = (SwitchCompat) findViewById(R.id.service_enabled_switch);
         //Listeners
         switchService.setOnClickListener(view -> savePreferences());
 

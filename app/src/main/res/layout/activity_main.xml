@@ -57,9 +57,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <Switch
+    <androidx.appcompat.widget.SwitchCompat
         android:id="@+id/service_enabled_switch"
-        android:layout_width="42dp"
+        android:layout_width="60dp"
         android:layout_height="32dp"
         android:layout_marginTop="48dp"
         android:layout_marginEnd="16dp"
@@ -68,7 +68,10 @@
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/app_name"
         app:layout_constraintTop_toTopOf="parent"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
+        tools:ignore="UseSwitchCompatOrMaterialXml"
+
+        android:thumb="@drawable/thumb"
+        app:track="@drawable/track"/>
 
     <RadioGroup
         android:id="@+id/toggle"
@@ -121,7 +124,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/toggle"
         android:layout_margin="16dp"
-        android:scrollbars="none">
+        android:scrollbars="none"
+        android:padding="8dp">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -136,6 +140,7 @@
                 android:text="@string/screen_position"
                 android:textColor="@color/white"
                 android:textAlignment="center"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -148,6 +153,7 @@
                 android:text="@string/blur_status"
                 android:textAlignment="center"
                 android:textColor="@color/white"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView_screen_position" />
 
@@ -160,6 +166,7 @@
                 android:text="@string/backgroun_color"
                 android:textColor="@color/white"
                 android:textAlignment="center"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView_blur" />
 
@@ -172,6 +179,7 @@
                 android:text="@string/icon_size"
                 android:textColor="@color/white"
                 android:textAlignment="center"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView_backgoundColor" />
 
@@ -184,6 +192,7 @@
                 android:text="@string/show_shadow"
                 android:textColor="@color/white"
                 android:textAlignment="center"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView_iconSize" />
 
@@ -196,30 +205,36 @@
                 android:text="@string/icons_label"
                 android:textAlignment="center"
                 android:textColor="@color/white"
+                android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView_shadow" />
 
-            <Switch
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
+                android:layout_marginTop="8dp"
+                android:thumb="@drawable/thumb"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/textView_screen_position"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="UseSwitchCompatOrMaterialXml" />
 
-            <Switch
+                app:layout_constraintTop_toTopOf="parent"
+                app:track="@drawable/track"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />/>
+
+            <androidx.appcompat.widget.SwitchCompat
                 android:id="@+id/switch2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:thumb="@drawable/thumb"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="1.0"
                 app:layout_constraintStart_toEndOf="@+id/textView_blur"
                 app:layout_constraintTop_toBottomOf="@+id/switch1"
-                tools:ignore="UseSwitchCompatOrMaterialXml" />
+
+                app:track="@drawable/track"
+                tools:ignore="UseSwitchCompatOrMaterialXml" />/>
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
